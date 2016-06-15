@@ -72,7 +72,7 @@ Polymer({
     }
     this.set('_weekDays', weekDays);
     for (i = startIndex; i < this.value.length; i++) {
-      mapped.push(this.map[value[i]]);
+      mapped.push(this.map[value[i].label]);
     }
     this.set('mappedValue', mapped);
   },
