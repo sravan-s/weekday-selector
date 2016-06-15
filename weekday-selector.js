@@ -12,6 +12,12 @@ Polymer({
       notify: true
     },
 
+    mappedValue: {
+      type: Array,
+      value: [],
+      notify: true
+    },
+
     /**
      * set this if the week indices should start with a different value
      */
@@ -22,12 +28,39 @@ Polymer({
 
     _weekDays: Array,
 
+    map: {
+      type: Array,
+      value: [{
+        index: 0,
+        label: 'Sunday'
+      }, {
+        index: 1,
+        label: 'Monday'
+      }, {
+        index: 2,
+        label: 'Tuesday'
+      }, {
+        index: 3,
+        label: 'Wednesday'
+      }, {
+        index: 4,
+        label: 'Thursday'
+      }, {
+        index: 5,
+        label: 'Friday'
+      }, {
+        index: 6,
+        label: 'Saturday'
+      }]
+    }
+
   },
 
   observers: ['_valueChange(value, startIndex)'],
 
   _valueChange: function(value, startIndex) {
     var weekDays = [];
+    var mapped = [];
     value = value || [];
     var i;
     for (i = startIndex; i < startIndex + 7; i += 1) {
@@ -38,6 +71,10 @@ Polymer({
       });
     }
     this.set('_weekDays', weekDays);
+    for (i = startIndex; i < this.value.length; i++) {
+      mapped.push(this.map[value[i]]);
+    }
+    this.set('mappedValue', mapped);
   },
 
   _setValue: function() {
